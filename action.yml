@@ -1,6 +1,7 @@
 # action.yml
 name: "Release to Splunkbase"
 description: "Release an app or add-on to Splunkbase"
+author: "Diogo Silva"
 inputs:
   splunkbase_username:
     description: "Splunkbase account username"
