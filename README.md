@@ -1,1 +1,1 @@
-# splunkbase-release-action
+# Splunkbase Release Github Action
