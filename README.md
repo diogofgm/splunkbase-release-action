@@ -15,8 +15,8 @@ This repository provides a github action to publish Splunk Apps and Add-ons to S
 
 #### Example .splunkbase file
 ```
-SPLUNKBASE_ID=4664
-SPLUNKBASE_SPLUNK_VERSION=8.1,8.2
+SPLUNKBASE_ID=XXXX
+SPLUNKBASE_SPLUNK_VERSION=8.1,8.2,9.0
 SPLUNKBASE_SPLUNK_CIM_VERSION=4.x
 ```
 
