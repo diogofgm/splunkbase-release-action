@@ -17,7 +17,7 @@ This repository provides a github action to publish Splunk Apps and Add-ons to S
 SPLUNKBASE_ID=4664
 SPLUNKBASE_SPLUNK_VERSION=8.1,8.2
 SPLUNKBASE_SPLUNK_CIM_VERSION=4.x
-
+```
 
 ### Secrets
 
