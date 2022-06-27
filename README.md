@@ -5,7 +5,19 @@ This repository provides a github action to publish Splunk Apps and Add-ons to S
 ## Usage
 
 ```
+name: publish
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    uses: diogofgm/splunkbase-release-action/.github/workflows/splunkbase-release-action.yml@v0.0.1
 
 ```
 
