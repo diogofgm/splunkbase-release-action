@@ -1,6 +1,6 @@
 # Splunkbase Release Github Action
 
-This repository provides a github action to publish Splunk Apps and Add-ons to Splunkbase via the Splunkbase API.
+This repository provides a github action to publish Splunk Apps and Add-ons to Splunkbase via the [Splunkbase API](https://dev.splunk.com/enterprise/reference/splunkbase/sbreleaseapiref).
 
 ## Usage
 
