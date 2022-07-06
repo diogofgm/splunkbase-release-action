@@ -70,7 +70,7 @@ jobs:
         id: login
         shell: bash
         run: |
-          curl --location --request POST 'https://splunkbase.splunk.com/api/account:login/' --data-urlencode 'username='"${{ inputs.SPLUNKBASE_USER }}"'' --data-urlencode 'password='"${{ inputs.SPLUNKBASE_PASSWORD }}"'' > login.xml
+          curl --location --request POST 'https://splunkbase.splunk.com/api/account:login/' --data-urlencode 'username='"${{ secrets.SPLUNKBASE_USER }}"'' --data-urlencode 'password='"${{ secrets.SPLUNKBASE_PASSWORD }}"'' > login.xml
           ls
           pwd
           AUTH=$(awk '/id/{printf $1}' login.xml | cut -d'>' -f2 | cut -d'<' -f1)
@@ -83,4 +83,4 @@ jobs:
           echo ${{ steps.vars.outputs.SPLUNKBASE_ID }}
           echo ${{ steps.vars.outputs.SPLUNKBASE_SPLUNK_VERSION }}
           echo ${{ steps.vars.outputs.SPLUNKBASE_SPLUNK_CIM_VERSION }}
-          curl -u ${{ inputs.SPLUNKBASE_USER }}:${{ inputs.SPLUNKBASE_PASSWORD }} --request POST https://splunkbase.splunk.com/api/v1/app/${{ steps.vars.outputs.SPLUNKBASE_ID }}/new_release/ -F "files[]=@dist/${{ needs.build.outputs.ADDON_NAME }}-${{ needs.build.outputs.ADDON_VERSION }}.tar.gz" -F "filename=${{ needs.build.outputs.ADDON_NAME }}-${{ needs.build.outputs.ADDON_VERSION }}.tar.gz" -F "cim_versions=${{ steps.vars.outputs.SPLUNKBASE_SPLUNK_CIM_VERSION }}" -F "splunk_versions=${{ steps.vars.outputs.SPLUNKBASE_SPLUNK_VERSION }}" -F "visibility=true"
+          curl -u ${{ secrets.SPLUNKBASE_USER }}:${{ secrets.SPLUNKBASE_PASSWORD }} --request POST https://splunkbase.splunk.com/api/v1/app/${{ steps.vars.outputs.SPLUNKBASE_ID }}/new_release/ -F "files[]=@dist/${{ needs.build.outputs.ADDON_NAME }}-${{ needs.build.outputs.ADDON_VERSION }}.tar.gz" -F "filename=${{ needs.build.outputs.ADDON_NAME }}-${{ needs.build.outputs.ADDON_VERSION }}.tar.gz" -F "cim_versions=${{ steps.vars.outputs.SPLUNKBASE_SPLUNK_CIM_VERSION }}" -F "splunk_versions=${{ steps.vars.outputs.SPLUNKBASE_SPLUNK_VERSION }}" -F "visibility=true"
