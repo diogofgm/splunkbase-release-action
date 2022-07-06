@@ -7,13 +7,14 @@ on:
         required: false
         type: string
         default: "5.10.2"
-    secrets:
       SPLUNKBASE_USER:
         description: "Splunkbase username"
-        required: false
+        type: string
+        required: true
       SPLUNKBASE_PASSWORD:
         description: "Splunkbase password"
-        required: false
+        type: string
+        required: true
 
 jobs:
   build:
