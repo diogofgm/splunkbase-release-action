@@ -1,6 +1,12 @@
 name: Publish to Splunkbase
 on: 
   workflow_call:
+    inputs:
+      ucc_gen_version:
+        description: "ucc-gen version to install"
+        required: false
+        type: string
+        default: "5.10.2"
     secrets:
       SPLUNKBASE_USER:
         description: "Splunkbase username"
