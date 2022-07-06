@@ -19,8 +19,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      addon_name: ${{ steps.addon_name.outputs.ADDON_NAME }}
-      addon_version: ${{ steps.addon_version.outputs.ADDON_VERSION }}
+      addon_name: ${{ build.steps.addon_name.outputs.ADDON_NAME }}
+      addon_version: ${{ build.steps.addon_version.outputs.ADDON_VERSION }}
     steps:
       - uses: actions/checkout@v2.4.0
       - uses: actions/setup-python@v2.3.1
@@ -42,14 +42,14 @@ jobs:
           pip install --upgrade splunk-packaging-toolkit==1.0.1 splunk-add-on-ucc-framework==${{ inputs.ucc_gen_version }}
       - name: Building app
         run: |
-          ucc-gen --ta-version ${{ steps.addon_version.outputs.ADDON_VERSION }}
+          ucc-gen --ta-version ${{ build.steps.addon_version.outputs.ADDON_VERSION }}
       - name: Packaging app
         run: |
           mkdir dist
-          slim package output/${{ steps.addon_name.outputs.ADDON_NAME }} -o dist/
+          slim package output/${{ build.steps.addon_name.outputs.ADDON_NAME }} -o dist/
       - uses: actions/upload-artifact@v2.3.1
         with:
-          name: ${{ steps.addon_name.outputs.ADDON_NAME }}-${{ steps.addon_version.outputs.ADDON_VERSION }}.tar.gz
+          name: ${{ build.steps.addon_name.outputs.ADDON_NAME }}-${{ build.steps.addon_version.outputs.ADDON_VERSION }}.tar.gz
           path: dist/
       
   splunkbase-release:
@@ -60,7 +60,7 @@ jobs:
       - uses: actions/checkout@v2.4.0
       - uses: actions/download-artifact@v2.1.0
         with:
-          name: ${{ needs.build.outputs.ADDON_NAME }}-${{ needs.build.outputs.ADDON_VERSION }}.tar.gz
+          name: ${{ splunkbase-release.needs.build.outputs.ADDON_NAME }}-${{ splunkbase-release.needs.build.outputs.ADDON_VERSION }}.tar.gz
           path: dist
       - name: Load ENV variables
         id: vars
@@ -89,4 +89,4 @@ jobs:
           echo ${{ steps.vars.outputs.SPLUNKBASE_ID }}
           echo ${{ steps.vars.outputs.SPLUNKBASE_SPLUNK_VERSION }}
           echo ${{ steps.vars.outputs.SPLUNKBASE_SPLUNK_CIM_VERSION }}
-          curl -u ${{ inputs.SPLUNKBASE_USER }}:${{ inputs.SPLUNKBASE_PASSWORD }} --request POST https://splunkbase.splunk.com/api/v1/app/${{ steps.vars.outputs.SPLUNKBASE_ID }}/new_release/ -F "files[]=@dist/${{ needs.build.outputs.ADDON_NAME }}-${{ needs.build.outputs.ADDON_VERSION }}.tar.gz" -F "filename=${{ needs.build.outputs.ADDON_NAME }}-${{ needs.build.outputs.ADDON_VERSION }}.tar.gz" -F "cim_versions=${{ steps.vars.outputs.SPLUNKBASE_SPLUNK_CIM_VERSION }}" -F "splunk_versions=${{ steps.vars.outputs.SPLUNKBASE_SPLUNK_VERSION }}" -F "visibility=true"
+          curl -u ${{ inputs.SPLUNKBASE_USER }}:${{ inputs.SPLUNKBASE_PASSWORD }} --request POST https://splunkbase.splunk.com/api/v1/app/${{ splunkbase-release.steps.vars.outputs.SPLUNKBASE_ID }}/new_release/ -F "files[]=@dist/${{ splunkbase-release.needs.build.outputs.ADDON_NAME }}-${{ splunkbase-release.needs.build.outputs.ADDON_VERSION }}.tar.gz" -F "filename=${{ splunkbase-release.needs.build.outputs.ADDON_NAME }}-${{ splunkbase-release.needs.build.outputs.ADDON_VERSION }}.tar.gz" -F "cim_versions=${{ splunkbase-release.steps.vars.outputs.SPLUNKBASE_SPLUNK_CIM_VERSION }}" -F "splunk_versions=${{ splunkbase-release.steps.vars.outputs.SPLUNKBASE_SPLUNK_VERSION }}" -F "visibility=true"
