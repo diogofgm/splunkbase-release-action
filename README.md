@@ -13,7 +13,11 @@ The repo must have a `package` folder with your Splunk app contents.
 package/
 ├─ default/
 ├─ metadata/
+├─ app.manifest
+├─ README
+├─ LICENSE
 .splunkbase
+
 ```
 
 ### Example: splunkbase_release.yml
