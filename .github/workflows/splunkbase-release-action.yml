@@ -10,10 +10,10 @@ on:
     secrets:
       SPLUNKBASE_USER:
         description: "Splunkbase username"
-        required: false
+        required: true
       SPLUNKBASE_PASSWORD:
         description: "Splunkbase password"
-        required: false
+        required: true
 
 
 jobs:
