@@ -5,7 +5,7 @@ This repository provides a github action to publish Splunk Apps and Add-ons to S
 ## Usage
 
 ### Repo structure
-The repo must have a `package` folder with your Splunk app contents.
+The repo must have a `package` folder with your Splunk app contents, a .splunkbase file with the details of your app and the caller workflow
 
 #### Example: repo structure
 ```
@@ -22,7 +22,7 @@ package/
 
 ```
 
-### Example: splunkbase_release.yml
+#### Example: splunkbase_release.yml
 ```yaml
 name: Release to Splunkbase
 on: workflow_dispatch 
@@ -36,7 +36,7 @@ jobs:
 
 ```
 
-### Example: .splunkbase file
+#### Example: .splunkbase file
 ```
 SPLUNKBASE_ID=XXXX
 SPLUNKBASE_SPLUNK_VERSION=8.1,8.2,9.0
