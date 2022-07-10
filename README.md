@@ -4,6 +4,18 @@ This repository provides a github action to publish Splunk Apps and Add-ons to S
 
 ## Usage
 
+Repo structure should be as follow:
+
+```
+.github/
+├─ workflows/
+│  ├─ splunkbase_release.yml
+package/
+├─ default/
+├─ metadata/
+.splunkbase
+
+
 ```yaml
 name: Release to Splunkbase
 on: workflow_dispatch 
