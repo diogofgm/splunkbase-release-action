@@ -1,5 +1,5 @@
 name: Publish to Splunkbase
-on: 
+on:
   workflow_call:
     inputs:
       ucc_gen_version:
@@ -52,7 +52,7 @@ jobs:
         with:
           name: ${{ steps.addon_name.outputs.ADDON_NAME }}-${{ steps.addon_version.outputs.ADDON_VERSION }}.tar.gz
           path: dist/
-      
+
   splunkbase-release:
     name: Splunkbase release
     runs-on: ubuntu-latest
