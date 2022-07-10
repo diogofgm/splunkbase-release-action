@@ -5,7 +5,7 @@ This repository provides a github action to publish Splunk Apps and Add-ons to S
 ## Usage
 
 ### Repo structure
-The repo must have a package folder with your Splunk app contents.
+The repo must have a `package` folder with your Splunk app contents.
 ```
 .github/
 ├─ workflows/
