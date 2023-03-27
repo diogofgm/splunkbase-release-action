@@ -23,7 +23,7 @@ jobs:
       addon_name: ${{ steps.addon_name.outputs.ADDON_NAME }}
       addon_version: ${{ steps.addon_version.outputs.ADDON_VERSION }}
     steps:
-      - uses: actions/checkout@v3.4.0
+      - uses: actions/checkout@v3.5.0
       - uses: actions/setup-python@v4.1.0
         with:
           python-version: 3.7
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v3.4.0
+      - uses: actions/checkout@v3.5.0
       - uses: actions/download-artifact@v3.0.2
         with:
           name: ${{ needs.build.outputs.ADDON_NAME }}-${{ needs.build.outputs.ADDON_VERSION }}.tar.gz
