@@ -24,7 +24,7 @@ jobs:
       addon_version: ${{ steps.addon_version.outputs.ADDON_VERSION }}
     steps:
       - uses: actions/checkout@v4.1.5
-      - uses: actions/setup-python@v5.2.0
+      - uses: actions/setup-python@v5.3.0
         with:
           python-version: 3.7
       - name: Get version
